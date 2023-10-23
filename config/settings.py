@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from dotenv import dotenv_values
-config = dotenv_values(".env")
-SECRET_KEY = config.get("SECRET_KEY")
+# from dotenv import dotenv_values
+# config = dotenv_values(".env")
+# SECRET_KEY = config.get("SECRET_KEY")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,11 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
+SECRET_KEY = 'django-insecure-^h&e&f6nljcnh)&0etvse_x!k^v#g05!bbc%+6z(c7u+y-8pb$'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -82,14 +82,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config.get("NAME"),
+#         'USER': config.get("USER"),
+#         'PASSWORD': config.get("PASSWORD"),
+#         'HOST':config.get("HOST"),
+#         'PORT':config.get("PORT"),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config.get("NAME"),
-        'USER': config.get("USER"),
-        'PASSWORD': config.get("PASSWORD"),
-        'HOST':config.get("HOST"),
-        'PORT':config.get("PORT"),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -129,7 +136,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR.joinpath('static')]
+STATIC_ROOT = BASE_DIR.joinpath('static')
+# STATICFILES_DIRS = [BASE_DIR.joinpath('static')]
 
 MEDIA_ROOT = BASE_DIR.joinpath("media")
 MEDIA_URL = '/media/'
